@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lr.user_manager_system.mapper.RoleMapper">
+
+    <update id="updataRole">
+        update role
+        <trim prefix="set" suffixOverrides=",">
+            <if test="orderNum!=null">
+                order_num=#{orderNum},
+            </if>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="statu!=null">
+                statu=#{statu},
+            </if>
+            <if test="remanks!=null">
+                remanks=#{remanks}
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+
+    <insert id="insertRole" useGeneratedKeys="true" keyProperty= "id" keyColumn = "id">
+        insert into role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNum!=null">
+                order_num,
+            </if>
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="createTime!=null">
+                create_time,
+            </if>
+            <if test="statu!=null">
+                statu,
+            </if>
+            <if test="remanks!=null">
+                remanks
+            </if>
+        </trim>
+
+        <trim prefix=" values(" suffix=")" suffixOverrides=",">
+            <if test="orderNum!=null">
+                #{orderNum,jdbcType=VARCHAR},
+            </if>
+            <if test="name!=null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime!=null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="statu!=null">
+                #{statu,jdbcType=VARCHAR},
+            </if>
+            <if test="remanks!=null">
+                #{remanks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+
+    </insert>
+
+</mapper>

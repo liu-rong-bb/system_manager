@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.lr.user_manager_system.mapper.UserMapper">
+
+    <update id="updatae">
+		update users
+		<trim prefix="set" suffixOverrides=",">
+            <if test="loginName!=null">
+                login_name=#{loginName},
+            </if>
+            <if test="passworld!=null">
+                passworld=#{passworld},
+            </if>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="phone!=null">
+                phone=#{phone},
+            </if>
+            <if test="email!=null">
+                email=#{email},
+            </if>
+            <if test="sex!=null">
+                sex=#{sex},
+            </if>
+            <if test="statu!=null">
+                statu=#{statu},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="remanks!=null">
+                remanks=#{remanks}
+            </if>
+        </trim>
+		where id=#{id}
+	</update>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty= "id" keyColumn = "id">
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="loginName!=null">
+                login_name,
+            </if>
+            <if test="passworld!=null">
+                passworld,
+            </if>
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="phone!=null">
+                phone,
+            </if>
+            <if test="email!=null">
+                email,
+            </if>
+            <if test="sex!=null">
+                sex,
+            </if>
+            <if test="statu!=null">
+                statu,
+            </if>
+            <if test="createTime!=null">
+                create_time,
+            </if>
+            <if test="updateTime!=null">
+                update_time,
+            </if>
+            <if test="remanks!=null">
+                remanks,
+            </if>
+        </trim>
+
+        <trim prefix=" values(" suffix=")" suffixOverrides=",">
+            <if test="loginName!=null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="passworld!=null">
+                #{passworld,jdbcType=VARCHAR},
+            </if>
+            <if test="name!=null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="phone!=null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="email!=null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="sex!=null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="statu!=null">
+                #{statu,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime!=null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime!=null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remanks!=null">
+                #{remanks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+
+	</insert>
+
+</mapper>
