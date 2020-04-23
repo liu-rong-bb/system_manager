@@ -1,0 +1,25 @@
+create table users
+(
+ ID					            NUMBER(10) primary key NOT NULL,
+  NAME						    VARCHAR2(25),
+ ORDER_NUM					    NUMBER(10),
+ PERMISSION					    VARCHAR2(25),
+ PID						    NUMBER(10),
+ REMANKS					    VARCHAR2(255),
+ STATE						    VARCHAR2(5),
+ URL						    VARCHAR2(55),
+)
+
+create sequence SEQ_Menu
+increment by 1
+start with 1
+nomaxvalue
+nocycle
+nocache
+
+CREATE TRIGGER TG_Menu before
+insert on menu for each row
+when(new.id is null)
+BEGIN
+SELECT SEQ_Menu.nextval INTO:new.id from dual;
+END;

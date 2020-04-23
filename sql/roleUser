@@ -1,0 +1,28 @@
+create table role_user
+(
+ ID					            NUMBER(10) primary key NOT NULL,
+ ROLE_ID					    NUMBER(10),
+ USER_ID					    NUMBER(10)
+)
+
+alter table role_user
+add constraint roleId foreign key (ROLE_ID)
+references role(ID);
+
+alter table role_user
+add constraint userId foreign key (USER_ID)
+references users(ID);
+
+create sequence SEQ_RoleUser
+increment by 1
+start with 1
+nomaxvalue
+nocycle
+nocache
+
+CREATE TRIGGER TG_RoleUser before
+insert on role_user for each row
+when(new.id is null)
+BEGIN
+SELECT SEQ_RoleUser.nextval INTO:new.id from dual;
+END;

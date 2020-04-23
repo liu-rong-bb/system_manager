@@ -1,0 +1,28 @@
+create table users
+(
+ ID					            NUMBER(10) primary key NOT NULL,
+ CREATE_TIME					    TIMESTAMP(6),
+ EMAIL						    VARCHAR2(25),
+ LOGIN_NAME					    VARCHAR2(25),
+ NAME						    VARCHAR2(25),
+ PASSWORLD					    VARCHAR2(25),
+ PHONE						    NUMBER(19,2),
+ REMANKS					    VARCHAR2(25),
+ SEX						    VARCHAR2(5),
+ STATU						    VARCHAR2(5),
+ UPDATE_TIME					    TIMESTAMP(6)
+)
+
+create sequence SEQ_User
+increment by 1
+start with 1
+nomaxvalue
+nocycle
+nocache
+
+CREATE TRIGGER TG_Users before
+insert on users for each row
+when(new.id is null)
+BEGIN
+SELECT SEQ_User.nextval INTO:new.id from dual;
+END;

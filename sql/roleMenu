@@ -1,0 +1,28 @@
+create table role_menu
+(
+ ID					            NUMBER(10) primary key NOT NULL,
+ MENU_ID					    NUMBER(10),
+ ROLE_ID					    NUMBER(10)
+)
+
+alter table role_menu
+add constraint roleId2 foreign key (ROLE_ID)
+references role(ID);
+
+alter table role_menu
+add constraint menuId foreign key (MENU_ID)
+references menu(ID);
+
+create sequence SEQ_RoleMenu
+increment by 1
+start with 1
+nomaxvalue
+nocycle
+nocache
+
+CREATE TRIGGER TG_RoleMenu before
+insert on role_menu for each row
+when(new.id is null)
+BEGIN
+SELECT SEQ_RoleMenu.nextval INTO:new.id from dual;
+END;

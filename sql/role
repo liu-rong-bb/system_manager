@@ -1,0 +1,24 @@
+create table role
+(
+ ID					            NUMBER(10) primary key NOT NULL,
+ CREATE_TIME					    TIMESTAMP(6),
+ FAIL_TIME					    TIMESTAMP(6),
+ NAME						    VARCHAR2(25),
+ ORDER_NUM					    NUMBER(10),
+ REMANKS					    VARCHAR2(255),
+ STATU						    VARCHAR2(5),
+)
+
+create sequence SEQ_Role
+increment by 1
+start with 1
+nomaxvalue
+nocycle
+nocache
+
+CREATE TRIGGER TG_Role before
+insert on role for each row
+when(new.id is null)
+BEGIN
+SELECT SEQ_Role.nextval INTO:new.id from dual;
+END;
